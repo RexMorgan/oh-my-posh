@@ -26,6 +26,7 @@ type SegmentWriter interface {
 func init() {
 	gob.Register(&segments.Angular{})
 	gob.Register(&segments.Version{})
+	gob.Register(&segments.AppleMusic{})
 	gob.Register(&segments.Argocd{})
 	gob.Register(&segments.Aurelia{})
 	gob.Register(&segments.Aws{})
@@ -155,6 +156,8 @@ const (
 	Diamond SegmentStyle = "diamond"
 	// ANGULAR writes which angular cli version us currently active
 	ANGULAR SegmentType = "angular"
+	// APPLE_MUSIC writes Apple Music information and status
+	APPLE_MUSIC SegmentType = "apple-music"
 	// ARGOCD writes the current argocd context
 	ARGOCD SegmentType = "argocd"
 	// AURELIA writes which aurelia version is currently referenced in package.json
@@ -365,6 +368,7 @@ const (
 // Consumers of the library can also add their own segment writer.
 var Segments = map[SegmentType]func() SegmentWriter{
 	ANGULAR:         func() SegmentWriter { return &segments.Angular{} },
+	APPLE_MUSIC:     func() SegmentWriter { return &segments.AppleMusic{} },
 	ARGOCD:          func() SegmentWriter { return &segments.Argocd{} },
 	AURELIA:         func() SegmentWriter { return &segments.Aurelia{} },
 	AWS:             func() SegmentWriter { return &segments.Aws{} },
